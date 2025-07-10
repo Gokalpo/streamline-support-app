@@ -5,7 +5,7 @@ import { useAuth } from './AuthContext';
 
 interface TicketContextType {
   tickets: Ticket[];
-  createTicket: (title: string, description: string, priority: Ticket['priority']) => void;
+  createTicket: (title: string, description: string, priority: Ticket['priority'], department?: string) => void;
   addResponse: (ticketId: string, message: string) => void;
   updateTicketStatus: (ticketId: string, status: Ticket['status']) => void;
   assignTicket: (ticketId: string, assignedTo: string, assignedToName: string) => void;
@@ -61,7 +61,7 @@ export const TicketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [tickets, setTickets] = useState<Ticket[]>(mockTickets);
   const { user } = useAuth();
 
-  const createTicket = (title: string, description: string, priority: Ticket['priority']) => {
+  const createTicket = (title: string, description: string, priority: Ticket['priority'], department?: string) => {
     if (!user) return;
 
     const newTicket: Ticket = {
@@ -72,7 +72,7 @@ export const TicketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       priority,
       createdBy: user.id,
       createdByName: user.name,
-      department: user.department,
+      department: department || user.department,
       createdAt: new Date(),
       updatedAt: new Date(),
       responses: []

@@ -19,6 +19,7 @@ const CreateTicketForm: React.FC<CreateTicketFormProps> = ({ onSuccess }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState<'low' | 'medium' | 'high' | 'urgent'>('medium');
+  const [department, setDepartment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const { createTicket } = useTickets();
@@ -27,7 +28,7 @@ const CreateTicketForm: React.FC<CreateTicketFormProps> = ({ onSuccess }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!title.trim() || !description.trim()) {
+    if (!title.trim() || !description.trim() || !department) {
       toast({
         title: "Hata",
         description: "Lütfen tüm alanları doldurun",
@@ -39,7 +40,7 @@ const CreateTicketForm: React.FC<CreateTicketFormProps> = ({ onSuccess }) => {
     setIsSubmitting(true);
     
     try {
-      createTicket(title.trim(), description.trim(), priority);
+      createTicket(title.trim(), description.trim(), priority, department);
       
       toast({
         title: "Başarılı!",
@@ -50,6 +51,7 @@ const CreateTicketForm: React.FC<CreateTicketFormProps> = ({ onSuccess }) => {
       setTitle('');
       setDescription('');
       setPriority('medium');
+      setDepartment('');
       
       onSuccess?.();
     } catch (error) {
@@ -111,8 +113,28 @@ const CreateTicketForm: React.FC<CreateTicketFormProps> = ({ onSuccess }) => {
             </Select>
           </div>
 
+          <div className="space-y-2">
+            <Label>Departman</Label>
+            <Select value={department} onValueChange={setDepartment} disabled={isSubmitting}>
+              <SelectTrigger>
+                <SelectValue placeholder="Departman seçin" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="IT">Bilgi İşlem</SelectItem>
+                <SelectItem value="İnsan Kaynakları">İnsan Kaynakları</SelectItem>
+                <SelectItem value="Muhasebe">Muhasebe</SelectItem>
+                <SelectItem value="Pazarlama">Pazarlama</SelectItem>
+                <SelectItem value="Satış">Satış</SelectItem>
+                <SelectItem value="Restoran">Restoran</SelectItem>
+                <SelectItem value="Garson">Garson</SelectItem>
+                <SelectItem value="Mutfak">Mutfak</SelectItem>
+                <SelectItem value="Temizlik">Temizlik</SelectItem>
+                <SelectItem value="Güvenlik">Güvenlik</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
           <div className="bg-gray-50 p-3 rounded-lg text-sm text-gray-600">
-            <p><strong>Departman:</strong> {user?.department}</p>
             <p><strong>Oluşturan:</strong> {user?.name}</p>
           </div>
 

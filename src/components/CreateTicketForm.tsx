@@ -98,7 +98,7 @@ const CreateTicketForm: React.FC<CreateTicketFormProps> = ({ onSuccess }) => {
 
           <div className="space-y-2">
             <Label>Öncelik</Label>
-            <Select value={priority} onValueChange={setPriority} disabled={isSubmitting}>
+            <Select value={priority} onValueChange={(value) => setPriority(value as 'low' | 'medium' | 'high' | 'urgent')} disabled={isSubmitting}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>

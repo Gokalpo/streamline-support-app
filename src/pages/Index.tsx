@@ -3,7 +3,7 @@ import React from 'react';
 import { AuthProvider, useAuth } from '../contexts/AuthContext';
 import { TicketProvider } from '../contexts/TicketContext';
 import LoginForm from '../components/LoginForm';
-import Dashboard from '../components/Dashboard';
+import AppLayout from '../components/layouts/AppLayout';
 
 const AppContent = () => {
   const { user, isLoading } = useAuth();
@@ -25,7 +25,7 @@ const AppContent = () => {
 
   return (
     <TicketProvider>
-      <Dashboard />
+      <AppLayout />
     </TicketProvider>
   );
 };

@@ -38,13 +38,13 @@ const LoginForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="w-full max-w-md space-y-6">
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
-            <Shield className="h-8 w-8 text-white" />
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-4">
+              <Shield className="h-8 w-8 text-primary-foreground" />
+            </div>
+            <h1 className="text-3xl font-bold text-foreground">Destek Sistemi</h1>
+            <p className="text-muted-foreground mt-2">Hesabınıza giriş yapın</p>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Destek Sistemi</h1>
-          <p className="text-gray-600 mt-2">Hesabınıza giriş yapın</p>
-        </div>
 
         <Card className="border-0 shadow-xl">
           <CardHeader className="space-y-1">
@@ -93,9 +93,15 @@ const LoginForm = () => {
                 </Alert>
               )}
 
+              <div className="text-right">
+                <a href="#" className="text-sm text-primary hover:underline">
+                  Şifremi Unuttum
+                </a>
+              </div>
+
               <Button 
                 type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-700" 
+                className="w-full" 
                 disabled={isLoading}
               >
                 {isLoading ? (
